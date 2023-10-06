@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ViewTransitions } from "astro:transitions";
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "Home Page";
 ---
@@ -11,11 +12,10 @@ const pageTitle = "Home Page";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro</title>
+    <ViewTransitions />
   </head>
 
   <BaseLayout pageTitle={pageTitle}>
     <h2>My awesome blog subtitle</h2>
   </BaseLayout>
-
-
 </html>

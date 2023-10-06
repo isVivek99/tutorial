@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { ViewTransitions } from "astro:transitions";
 import "../styles/global.css";
 
 const pageTitle = "About Me";
@@ -26,30 +27,26 @@ const textCase = "uppercase";
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <style define:vars={{ skillColor, fontWeight, textCase }}>
-      h1 {
-        color: purple;
-        font-size: 4rem;
-      }
-
       .skill {
         color: var(--skillColor);
         font-weight: var(--fontWeight);
         text-transform: var(--textCase);
       }
     </style>
+    <ViewTransitions />
   </head>
+  <body>
+    <BaseLayout pageTitle={pageTitle}>
+      <h2>... and my new Astro site!</h2>
+      <p>
+        My name is {identity.firstName} and I work in {identity.country}, as a {
+          identity.occupation
+        }
+         and my hobbies include
+        <ol>
+          {skills.map((item) => <li class="skill">{item}</li>)}
+        </ol>
+      </p>
+    </BaseLayout>
+  </body>
 </html>
-<body>
-  <BaseLayout pageTitle={pageTitle}>
-    <h2>... and my new Astro site!</h2>
-    <p>
-      My name is {identity.firstName} and I work in {identity.country}, as a {
-        identity.occupation
-      }
-       and my hobbies include
-      <ol>
-        {skills.map((item) => <li class="skill">{item}</li>)}
-      </ol>
-    </p>
-  </BaseLayout>
-</body>

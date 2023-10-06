@@ -1,6 +1,5 @@
 ---
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/global.css";
 
 const pageTitle = "About Me";
@@ -41,17 +40,16 @@ const textCase = "uppercase";
   </head>
 </html>
 <body>
-  <Header />
-  <h1>{pageTitle}</h1>
-  <h2>... and my new Astro site!</h2>
-  <p>
-    My name is {identity.firstName} and I work in {identity.country}, as a {
-      identity.occupation
-    }
-     and my hobbies include
-    <ol>
-      {skills.map((item) => <li class="skill">{item}</li>)}
-    </ol>
-  </p>
-  <Footer />
+  <BaseLayout pageTitle={pageTitle}>
+    <h2>... and my new Astro site!</h2>
+    <p>
+      My name is {identity.firstName} and I work in {identity.country}, as a {
+        identity.occupation
+      }
+       and my hobbies include
+      <ol>
+        {skills.map((item) => <li class="skill">{item}</li>)}
+      </ol>
+    </p>
+  </BaseLayout>
 </body>

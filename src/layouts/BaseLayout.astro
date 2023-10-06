@@ -1,7 +1,8 @@
 ---
 import "../styles/global.css";
-import BaseLayout from "../layouts/BaseLayout.astro";
-const blogTitle = "Blog Page";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+const { pageTitle } = Astro.props;
 ---
 
 <html lang="en">
@@ -10,12 +11,15 @@ const blogTitle = "Blog Page";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{blogTitle}</title>
+    <title>{pageTitle}</title>
   </head>
   <body>
-    <BaseLayout pageTitle={blogTitle}>
-      <h1>My Astro Learning Blog</h1>
-      <p>This is where I will post about my journey learning Astro.</p>
-    </BaseLayout>
+    <Header />
+    <h1>{pageTitle}</h1>
+    <slot />
+    <Footer />
+    <script>
+      import "../scripts/menu.js";
+    </script>
   </body>
 </html>

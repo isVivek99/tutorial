@@ -25,7 +25,8 @@
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
       return localStorage.getItem('theme');
     }
-    //window.matchMedia is used to write jaavscript for specific screen width or 
+    //window.matchMedia is used to write javscript for specific screen width or 
+    //toggling dark or light mode
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       return 'dark';
     }
@@ -48,5 +49,20 @@
     localStorage.setItem("theme", isDark ? "dark" : "light");
   }
 
-  document.getElementById("themeToggle").addEventListener("click", handleToggleClick);
+  document.addEventListener('astro:page-load', () => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API#the_view_transition_process
+    // https://docs.astro.build/en/guides/view-transitions/#astropage-load
+    // since we are using view transitions, 
+    // this event is a part of the flow why navigating
+    // after this event we need to 
+    // mount this event listener again
+    document.getElementById("themeToggle").addEventListener("click", handleToggleClick);
+  
+  }, { once: false });
+
+    // Runs on view transitions navigation
+    // here when we navigate after the page is loaded this callback s triggered 
+    // which helps in persisting the dark mode
+    // https://docs.astro.build/en/guides/view-transitions/#astroafter-swap
+    document.addEventListener('astro:after-swap', handleToggleClick);
 </script>
